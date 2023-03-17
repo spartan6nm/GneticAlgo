@@ -20,7 +20,7 @@ public class Agent_GA : Agent
     static WorldState currentState;
     static List<Vector3> birdPosList;
 
-    //TODO: Your code here (Q2): Set this flag to true in order to use the 2X site corssover operator of task 2 (you need to implement it below).
+    //Set this flag to true in order to use the 2X site corssover operator of task 2 (you need to implement it below).
     const bool USE_2XSITE_CROSSOVER = true;
 
     private void Start()
@@ -51,19 +51,17 @@ public class Agent_GA : Agent
         for (int i = 0; i < 2; i++)
             populations[i].Clear();
         popIndex = 0;
-        for (int i = 0; i < sizeGeneration; i++)
+        for (int i = 0; i < sizeGeneration; i++) // create populations based on the size of generation
         {
             populations[popIndex].Add(RandomChromosome());
         }
         if (lastBestChromosome != "")
         {
-            string cutLastBestChromosome = lastBestChromosome.Substring(1, lastBestChromosome.Length - 1);
+            string cutLastBestChromosome = lastBestChromosome.Substring(1, lastBestChromosome.Length - 1); // remove the first index of the last best chromosome
 
-            cutLastBestChromosome += RandomChromosome(cutLastBestChromosome[cutLastBestChromosome.Length - 1]);
+            cutLastBestChromosome += RandomChromosome(cutLastBestChromosome[cutLastBestChromosome.Length - 1]); // randomize the last best chromosomes last index
 
-            populations[popIndex][0] = cutLastBestChromosome;
-
-            //TODO: Your code here (Q1): Overwrite populations[popIndex][0] with the shifted version of last best chromosome.
+            populations[popIndex][0] = cutLastBestChromosome; // Overwrite populations[popIndex][0] with the shifted version of last best chromosome.
         }
 
         for (int g = 1; g <= numGenerations; g++)
@@ -112,7 +110,7 @@ public class Agent_GA : Agent
             popFitness.Add(f);
             popProbabilities.Add(f);
             sum += popFitness[i];
-            if (popFitness[i] > max)
+            if (popFitness[i] > max) // select the most fit as elite
             {
                 max = popFitness[i];
                 eliteIndex = i;
@@ -218,7 +216,6 @@ public class Agent_GA : Agent
                         }
                     }
 
-                    //TODO: Your code here (Q2): Implement the 2x site crossover opperation shown in slide #9.
                 }
                 else
                 {
